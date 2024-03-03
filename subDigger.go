@@ -158,7 +158,7 @@ func main() {
 	}{
 		{"sublist3r", []string{"-d", domain}},
 		{"subfinder", []string{"-d", domain}},
-		{"assetfinder", []string{"-d", domain}},
+		{"assetfinder", []string{domain}},
 		{"findomain", []string{"-t", domain}},
 	}
 
