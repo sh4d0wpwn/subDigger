@@ -52,23 +52,25 @@ func executeExternalTool(domain, toolName string, args []string, results *Subdom
 // Existing parseSubdomains function as provided
 
 func parseSubdomains(rawOutput, domain string) []string {
-	regexPattern := fmt.Sprintf(`([a-zA-Z0-9_-]+\.)+%s`, regexp.QuoteMeta(domain))
-	subdomainRegex := regexp.MustCompile(regexPattern)
+    regexPattern := fmt.Sprintf(`([a-zA-Z0-9_-]+\.)+%s`, regexp.QuoteMeta(domain))
+    subdomainRegex := regexp.MustCompile(regexPattern)
 
-	matches := subdomainRegex.FindAllString(rawOutput, -1)
+    matches := subdomainRegex.FindAllString(rawOutput, -1)
 
-	// Deduplicate matches
-	uniqueMatches := make(map[string]bool)
-	for _, match := range matches {
-		uniqueMatches[match] = true
-	}
+    // Deduplicate matches and exclude subdomains containing "*"
+    uniqueMatches := make(map[string]bool)
+    for _, match := range matches {
+        if !strings.Contains(match, "*") {
+            uniqueMatches[match] = true
+        }
+    }
 
-	var subdomains []string
-	for subdomain := range uniqueMatches {
-		subdomains = append(subdomains, subdomain)
-	}
+    var subdomains []string
+    for subdomain := range uniqueMatches {
+        subdomains = append(subdomains, subdomain)
+    }
 
-	return subdomains
+    return subdomains
 }
 
 func httpGet(url string) ([]byte, error) {
