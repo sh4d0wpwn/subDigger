@@ -15,6 +15,7 @@
 ```sh
 git clone https://github.com/sh4d0wpwn/subDigger.git
 cd subDigger
+chmod +x InstallationScipts/*
 ./InstallationScipts/GoInstaller.sh    # to install golang
 ./InstallationScipts/ToolInstaller.sh  # to install tools used in subDigger
 go build subDigger.go
