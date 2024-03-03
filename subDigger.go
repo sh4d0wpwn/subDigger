@@ -156,7 +156,7 @@ func main() {
 		name string
 		args []string
 	}{
-		{"sublist3r", []string{"-d", domain}},
+		{"sublist3r", []string{"-n","-d", domain}},
 		{"subfinder", []string{"-d", domain}},
 		{"assetfinder", []string{domain}},
 		{"findomain", []string{"-t", domain}},
